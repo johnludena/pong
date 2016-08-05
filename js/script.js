@@ -89,7 +89,7 @@ Paddle.prototype.move = function(x, y) {
   }
 }
 
-// PLAYER constructord
+// PLAYER constructor
 function Player() {
    	this.paddle = new Paddle(175, 580, 50, 10)
 }
@@ -184,7 +184,7 @@ Ball.prototype.update = function(paddle1, paddle2) {
 
 	if(this.y > 600) { // a point was scored by computer
 		this.x_speed = 0;
-		this.y_speed = 3;
+		this.y_speed = -3;
 		this.x = 200;
 		this.y = 300;
 		
@@ -197,14 +197,14 @@ Ball.prototype.update = function(paddle1, paddle2) {
 	if(top_y > 300) {
 		if(top_y < (paddle1.y + paddle1.height) && bottom_y > paddle1.y && top_x < (paddle1.x + paddle1.width) && bottom_x > paddle1.x) {
 		  // hit the player's paddle
-		  this.y_speed = -3;
+		  this.y_speed = -10;
 		  this.x_speed += (paddle1.x_speed / 2);
 		  this.y += this.y_speed;
 		}
 	} else {
 		if(top_y < (paddle2.y + paddle2.height) && bottom_y > paddle2.y && top_x < (paddle2.x + paddle2.width) && bottom_x > paddle2.x) {
 		  // hit the computer's paddle
-		  this.y_speed = 3;
+		  this.y_speed = 10;
 		  this.x_speed += (paddle2.x_speed / 2);
 		  this.y += this.y_speed;
 		}
