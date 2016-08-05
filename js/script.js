@@ -1,4 +1,7 @@
-console.log('hello world!')
+// Based on: https://robots.thoughtbot.com/pong-clone-in-javascript
+
+var containerNode = document.querySelector('.game-container')
+console.log('container node >>>', containerNode)
 
 // use requestAnimationFrame method to simulate 60fps
 var animate = window.requestAnimationFrame ||
@@ -8,6 +11,7 @@ var animate = window.requestAnimationFrame ||
   		window.setTimeout(callback, 1000/60) 
 }
 
+// create new Canvas element where we'll draw all the game elements
 var canvas = document.createElement('canvas')
 
 var width = 400
@@ -16,14 +20,20 @@ var height = 600
 canvas.width = width
 canvas.height = height
 
-
 var context = canvas.getContext('2d')
 
-// Append canvas to document body
+// Append canvas to container node
 window.onload = function() {
-	document.body.appendChild(canvas)
+	containerNode.appendChild(canvas)
   	animate(step)
 }
+
+// Get initial counters for player and computer on page load
+var playerScoreNode = document.querySelector('.player-score')
+var computerScoreNode = document.querySelector('.computer-score')
+
+var playerScore = 0
+var computerScore = 0
 
 // step function updates all objects, renders objects
 // and then run requestAnimationFrame again
@@ -160,11 +170,28 @@ Ball.prototype.update = function(paddle1, paddle2) {
 		this.x_speed = -this.x_speed;
 	}
 
-	if(this.y < 0 || this.y > 600) { // a point was scored
+	if(this.y < 0) { // a point was scored by the player
 		this.x_speed = 0;
 		this.y_speed = 3;
 		this.x = 200;
 		this.y = 300;
+		
+		// update score on playerScore global variable and display it on node
+		playerScore++
+		playerScoreNode.textContent = playerScore
+
+	}
+
+	if(this.y > 600) { // a point was scored by computer
+		this.x_speed = 0;
+		this.y_speed = 3;
+		this.x = 200;
+		this.y = 300;
+		
+		// update score on global variable and display it on node
+		computerScore++
+		computerScoreNode.textContent = computerScore
+
 	}
 
 	if(top_y > 300) {
