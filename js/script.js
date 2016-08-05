@@ -1,4 +1,4 @@
-// Based on: https://robots.thoughtbot.com/pong-clone-in-javascript
+// Based on: http://jsfiddle.net/kHJr6/2/
 
 var containerNode = document.querySelector('.game-container')
 console.log('container node >>>', containerNode)
